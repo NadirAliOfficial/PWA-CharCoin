@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import {
   Carousel,
   CarouselContent,
@@ -8,44 +8,63 @@ import {
 } from "@/components/ui/carousel";
 import { SingleNewsSheet } from "./view-exchange";
 import { Button } from "../ui/button";
+import { useState, useEffect } from "react";
+import { getData } from "../const";
 
-const newsItems = [
-  {
-    id: 1,
-    title: "CHAR Coin donates $145,000 to Chilean earthquake victims",
-    category: "GLOBAL EMERGENCIES",
-    image: "/feature-image.png?height=600&width=1200",
-  },
-  {
-    id: 2,
-    title: "Community Update: Q1 2024 Highlights",
-    category: "ANNOUNCEMENTS",
-    image: "/feature-image.png?height=600&width=1200",
-  },
-  {
-    id: 3,
-    title: "New Partnership Announcement",
-    category: "PARTNERSHIPS",
-    image: "/feature-image.png?height=600&width=1200",
-  },
-];
+
+import { useRouter } from 'next/navigation'
 
 export default function NewsCarousel() {
+
+interface ItemType {
+  id: number | string;
+  image: string; 
+  title:string;
+  category: string;
+  views:string;
+  detail:string;
+}
+
+const[newsItems, setNewsItems] = useState<ItemType[]>();
+
+const router = useRouter();
+
+let isBusy = false;
+const getNewsItems=async()=>{
+     if(isBusy) return;
+     isBusy = true;
+    const result = await getData("/api/news");
+    if(result.statusCode != 200) 
+    {
+      router.push("/login");
+    }
+    // @ts-expect-error no such issue. 
+    setNewsItems(result.data);
+    isBusy = false;
+};
+
+
+
+useEffect(()=>{ 
+  getNewsItems();
+}, []);
+
+
+
+
   return (
     <div className="w-full space-y-4 ">
       <h2 className="text-lg font-semibold">Latest News</h2>
       <Carousel className="w-full">
         <CarouselContent>
-          {newsItems.map((item) => (
-            <CarouselItem key={item.id}>
-              <SingleNewsSheet>
+         {newsItems && newsItems.length>0 && newsItems?.map((item) => (
+            <CarouselItem className="show" key={item.id}>
+              <SingleNewsSheet  item={item}>
                 <Button className="relative aspect-[2/1] h-full  w-full overflow-hidden rounded-lg">
-                  <Image
+                  <img
                     src={item.image || "/placeholder.svg"}
                     alt={item.title}
-                    fill
                     className="object-cover"
-                    priority={item.id === 1}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/20" />
                   <div className="absolute text-start bottom-0 left-0 p-6 text-white">

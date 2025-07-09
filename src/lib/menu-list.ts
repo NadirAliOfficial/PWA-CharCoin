@@ -6,6 +6,8 @@ import {
   UserCircle,
 } from "@mynaui/icons-react";
 
+import { Label } from "@mynaui/icons-react";
+
 type Submenu = {
   href: string;
   label: string;
@@ -41,7 +43,7 @@ export function getMenuList(): Group[] {
           label: "Causes",
           icon: Leaves,
           submenus: [],
-        },
+        },      
         {
           href: "/rewards",
           label: "Rewards",

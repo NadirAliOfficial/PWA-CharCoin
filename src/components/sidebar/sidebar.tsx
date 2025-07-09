@@ -5,10 +5,9 @@ import { Button } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils";
 import { useSidebarStore } from "@/stores/sidebar-store";
+import { BrandTelegram, BrandTwitter } from "@mynaui/icons-react";
 import LogoImage from "../custom/logo-image";
 import { SidebarToggle } from "./sidebar-toggle";
-import { Twitter } from "lucide-react";
-import { BrandTelegram, BrandTwitter } from "@mynaui/icons-react";
 
 export function Sidebar() {
   const sidebar = useSidebarStore();
@@ -22,7 +21,9 @@ export function Sidebar() {
         settings.disabled && "hidden"
       )}
     >
+
       <SidebarToggle isOpen={isOpen} setIsOpen={toggleOpen} />
+      
       <div
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}

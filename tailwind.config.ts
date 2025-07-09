@@ -1,5 +1,8 @@
 import { Card } from "@/components/ui/custom/custom-card";
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
+import scrollbarHide from "tailwind-scrollbar-hide";
+
 
 export default {
   darkMode: ["class"],
@@ -74,5 +77,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate, scrollbarHide],
 } satisfies Config;

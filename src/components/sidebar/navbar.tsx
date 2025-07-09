@@ -3,7 +3,7 @@ import { SheetMenu } from "./sheet-menu";
 
 export function Navbar() {
   return (
-    <header className="sticky flex justify-between px-8 py-4 top-0 z-10 w-full bg-background  lg:hidden">
+    <header className="sticky flex justify-between items-center px-8 py-4 top-0 z-10 w-full bg-background  lg:hidden">
       <LogoImage width={100} />
       <SheetMenu />
     </header>

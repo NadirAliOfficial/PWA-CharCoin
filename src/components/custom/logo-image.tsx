@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import Image from "next/image";
+import Link from "next/link";
 
 const LogoImage = ({
   width = 376,
@@ -11,15 +11,15 @@ const LogoImage = ({
   const aspectRatio = 376 / 115;
 
   return (
-    <div className={cn("flex items-center  justify-center", className)}>
-      <Image
+    <Link href="/" className={cn("flex items-center  justify-center", className)}>
+      <img
         alt="Charcoin"
         src="/logo.svg"
         width={width}
         height={width / aspectRatio}
         className="h-auto"
       />
-    </div>
+    </Link>
   );
 };
 

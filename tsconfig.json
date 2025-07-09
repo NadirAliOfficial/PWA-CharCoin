@@ -29,7 +29,9 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "svgr.d.ts", "src/components/custom/stack-with-purpose.js", "src/app/(main)/account/page.jsx", "src/stores/sidebar-store.js", "src/app/(main)/dashboard/page.jsx", "src/app/(main)/my-impact/page.jsx", "src/components/ui/custom/choose-or-vote.jsx", "src/components/custom/causes-carousel.jsx", "src/components/custom/causes-cards.jsx", "src/components/custom/activity-chart.jsx", "src/app/(main)/causes/page.jsx", "src/stores/causes-store.jsx", "src/components/ui/custom/cause-sheet.jsx", "src/components/custom/newscards.jsx", "src/components/custom/MyStakesModal.js", "src/components/custom/impact-progress-track.js", "src/components/custom/alert-dialog.jsx",
+
   ],
   "exclude": ["node_modules"]
 }

@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { PlayCircle, PauseCircle } from "@mynaui/icons-react";
 import { cn } from "@/lib/utils"; // Ensure cn utility for conditional classNames
 
-function SingleVideo() {
+function SingleVideo({ url }: {url: string}) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -83,7 +83,7 @@ function SingleVideo() {
             controls={false}
           >
             <source
-              src="https://res.cloudinary.com/dx2tjofpa/video/upload/v1739566194/Getting_diamonds_in_under_2_minutes_v6qzpo.mp4"
+              src={url}
               type="video/mp4"
             />
             Your browser does not support the video tag.

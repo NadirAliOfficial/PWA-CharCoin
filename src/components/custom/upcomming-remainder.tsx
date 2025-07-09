@@ -1,9 +1,12 @@
 "use client";
 
+import useDashboardStore from "@/stores/dashboard-store";
 import { ThumbsUp } from "lucide-react";
-import Image from "next/image";
+
 
 export default function UpcomingReminders() {
+  
+  const {lastNft, winningCause, totalStaked} = useDashboardStore();
   return (
     <div className="bg-background p-6 rounded-lg">
       <h2 className="text-zinc-100 text-sm font-medium mb-6">
@@ -26,7 +29,7 @@ export default function UpcomingReminders() {
               <div className="border-t border-dotted border-zinc-800 my-4" />
               <p className="text-zinc-400 text-sm">
                 You have{" "}
-                <span className="text-zinc-100 font-medium">20,390 tokens</span>{" "}
+                <span className="text-zinc-100 font-medium">{totalStaked} tokens</span>{" "}
                 staked! Make an impact by voting for a cause you believe in
                 before time runs out.
               </p>
@@ -39,8 +42,8 @@ export default function UpcomingReminders() {
           {/* Winning Cause Card */}
           <div className=" rounded-lg overflow-hidden">
             <div className="flex gap-4 hover:bg-custom-slate p-4">
-              <Image
-                src="/feature-image.png"
+              <img
+                src={winningCause.image}
                 width={80}
                 height={80}
                 alt="Clean water project"
@@ -51,9 +54,9 @@ export default function UpcomingReminders() {
                   Winning cause
                 </h3>
                 <p className="text-zinc-400 text-sm line-clamp-3 mb-2">
-                  Clean water in Guatemala's most affected community
+                  {winningCause.title}
                 </p>
-                <p className="text-zinc-500 text-sm">23,345 points</p>
+                <p className="text-zinc-500 text-sm">{winningCause.points} points</p>
               </div>
             </div>
           </div>
@@ -61,8 +64,8 @@ export default function UpcomingReminders() {
           {/* NFT Card */}
           <div className=" rounded-lg overflow-hidden">
             <div className="flex gap-4 hover:bg-custom-slate p-4">
-              <Image
-                src="/feature-image.png"
+              <img
+                src={lastNft.image}
                 width={80}
                 height={80}
                 alt="Clean water project"
@@ -73,11 +76,10 @@ export default function UpcomingReminders() {
                   NFT of the month
                 </h3>
                 <p className="text-zinc-400 text-sm line-clamp-3 mb-2">
-                  The NFT will be randomly awarded to one of the currently
-                  staking wallets.
+                  {lastNft.title}
                 </p>
                 <p className="text-zinc-500 text-[9px]">
-                  NFT will be given away on the 25th of the month
+                  Release on : {lastNft.releaseDate}
                 </p>
               </div>
             </div>

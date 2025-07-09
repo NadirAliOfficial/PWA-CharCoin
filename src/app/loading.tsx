@@ -1,3 +1,4 @@
+"use client"
 import { SplashScreen } from "@/components/splash/screen";
 
 const LoadingScreen = () => {

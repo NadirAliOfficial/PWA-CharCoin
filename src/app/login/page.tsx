@@ -1,20 +1,22 @@
+"use client";
 import { ArrowLeft, Twitter } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
-import { ConnectTo } from "@/components/ui/custom/connect-to-dialog";
+import WalletButton from "@/components/WalletButton"
+import Web3Login from "@/components/Web3Login"
+
+
 
 const LoginPage = () => {
   return (
     <div className="flex min-h-screen  relative  ">
       <div className="w-5/12 max-lg:w-full  p-5">
-        <Button variant={"newly_secondary"} className="font-bold">
-          <ArrowLeft />
-          Back
-        </Button>
+        <Link  href="/dashboard" className="flex">
+          <ArrowLeft /> 
+          <span className="px-2">Dashboard</span>
+        </Link>
         <div className="flex flex-col  max-w-sm gap-4 mx-auto justify-center  h-5/6 mt-4 ">
-          <Image
+          <img
             src={"/logo.svg"}
             alt="Charcoin"
             width={376 / 2}
@@ -25,12 +27,21 @@ const LoginPage = () => {
             positive impact on the world.{" "}
           </h1>
           <hr />
-          <ConnectTo />
+          {/* <ConnectTo /> */}
+
+          <div className="flex">
+              <WalletButton />
+              <div className="py-1 px-3">
+                <Web3Login />
+              </div>
+          </div>
+
+
           <hr />
           <span>
             By login or joining you agree with our{" "}
             <Link className="text-primary hover:underline" href={"/"}>
-              Privacy Policies
+            Privacy Policies
             </Link>
             ,{" "}
             <Link className="text-primary hover:underline" href={"/"}>
@@ -53,8 +64,7 @@ const LoginPage = () => {
         </div>
       </div>
       <div className="max-lg:hidden  w-full">
-        {" "}
-        <Image
+        <img
           src={"/feature-image.png"}
           alt="Feature Image"
           width={500}

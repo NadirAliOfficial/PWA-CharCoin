@@ -25,7 +25,7 @@ export default function SidebarLayout({
       >
         <Navbar />
 
-        <div className="p-4  min-h-screen max-w-[1680px] mx-auto ">
+        <div className="p-4 max-md:p-0  min-h-screen max-w-[1680px] mx-auto ">
           {children}
         </div>
       </main>

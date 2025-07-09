@@ -1,0 +1,2692 @@
+{
+  "address": "5qojvegehAfNjtSQbjRsqoHCfs85s71bT6daQZa5qNg6",
+  "metadata": {
+    "name": "charcoin",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "approve_withdrawal_handler",
+      "discriminator": [
+        224,
+        86,
+        109,
+        241,
+        104,
+        118,
+        38,
+        194
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "treasury",
+          "writable": true
+        },
+        {
+          "name": "withdrawal",
+          "writable": true
+        },
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "buyback_burn_handler",
+      "discriminator": [
+        193,
+        222,
+        244,
+        224,
+        82,
+        48,
+        97,
+        231
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint",
+          "writable": true
+        },
+        {
+          "name": "burn_wallet_ata",
+          "writable": true
+        },
+        {
+          "name": "burn_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "fee_amount",
+          "type": "u64"
+        },
+        {
+          "name": "conversion_rate",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "cast_vote_handler",
+      "docs": [
+        "Casts or updates a vote for a charity."
+      ],
+      "discriminator": [
+        169,
+        168,
+        169,
+        43,
+        110,
+        254,
+        43,
+        167
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "charity",
+          "writable": true
+        },
+        {
+          "name": "vote_record",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  111,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "charity"
+              },
+              {
+                "kind": "account",
+                "path": "voter"
+              }
+            ]
+          }
+        },
+        {
+          "name": "voter",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "user",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "voter"
+              }
+            ]
+          }
+        },
+        {
+          "name": "staking_pool"
+        }
+      ],
+      "args": [
+        {
+          "name": "vote_weight",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "change_emergency_state_handler",
+      "discriminator": [
+        50,
+        206,
+        251,
+        241,
+        158,
+        251,
+        41,
+        215
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "state",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "claim_reward_handler",
+      "discriminator": [
+        47,
+        72,
+        65,
+        199,
+        163,
+        3,
+        252,
+        187
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "staking_pool",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  116,
+                  97,
+                  107,
+                  105,
+                  110,
+                  103,
+                  95,
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "staking_pool.token_mint",
+                "account": "StakingPool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user_authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_stake",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  107,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user_authority"
+              },
+              {
+                "kind": "arg",
+                "path": "index"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "user_token_account",
+          "writable": true
+        },
+        {
+          "name": "staking_reward_ata",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "index",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "create_withdrawal_handler",
+      "discriminator": [
+        165,
+        102,
+        186,
+        8,
+        64,
+        134,
+        49,
+        203
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "treasury",
+          "writable": true
+        },
+        {
+          "name": "withdrawal",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  119,
+                  105,
+                  116,
+                  104,
+                  100,
+                  114,
+                  97,
+                  119,
+                  97,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "recipient",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "distribute_marketing_funds_handler",
+      "discriminator": [
+        71,
+        229,
+        231,
+        237,
+        60,
+        29,
+        21,
+        67
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "docs": [
+            "The marketing wallet that tracks allocated funds."
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "signer1",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "source_ata",
+          "writable": true
+        },
+        {
+          "name": "dest_wallet1_ata",
+          "docs": [
+            "Destination token account for Marketing Wallet 1 funds."
+          ],
+          "writable": true
+        },
+        {
+          "name": "dest_wallet2_ata",
+          "docs": [
+            "Destination token  account for Marketing Wallet 2 funds."
+          ],
+          "writable": true
+        },
+        {
+          "name": "death_wallet_ata",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "total_amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "execute_withdrawal_handler",
+      "discriminator": [
+        44,
+        188,
+        28,
+        251,
+        177,
+        218,
+        227,
+        54
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "treasury",
+          "writable": true
+        },
+        {
+          "name": "withdrawal",
+          "writable": true
+        },
+        {
+          "name": "recipient",
+          "writable": true
+        },
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "finalize_charity_vote_handler",
+      "docs": [
+        "Finalizes charity voting after the voting period ends."
+      ],
+      "discriminator": [
+        160,
+        166,
+        60,
+        119,
+        127,
+        186,
+        14,
+        175
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "charity",
+          "writable": true
+        },
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "finalize_proposal_handler",
+      "discriminator": [
+        249,
+        206,
+        146,
+        154,
+        151,
+        212,
+        68,
+        48
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "proposal",
+          "writable": true
+        },
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize",
+      "docs": [
+        "Initializes the global configuration."
+      ],
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint",
+          "writable": true
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "config",
+          "type": {
+            "defined": {
+              "name": "Config"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "initialize_treasury_handler",
+      "discriminator": [
+        115,
+        240,
+        171,
+        39,
+        135,
+        187,
+        75,
+        115
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "treasury",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  101,
+                  97,
+                  115,
+                  117,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "owners",
+          "type": {
+            "vec": "pubkey"
+          }
+        },
+        {
+          "name": "threshold",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "register_charity_handler",
+      "docs": [
+        "Registers a new charity for the donation ecosystem."
+      ],
+      "discriminator": [
+        217,
+        1,
+        139,
+        58,
+        239,
+        50,
+        57,
+        94
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "charity",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  104,
+                  97,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "config_account.config.next_charity_id",
+                "account": "ConfigAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "registrar",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "wallet",
+          "type": "pubkey"
+        },
+        {
+          "name": "start_time",
+          "type": "i64"
+        },
+        {
+          "name": "end_time",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "release_funds_handler",
+      "docs": [
+        "Releases funds from the treasury to staking rewards and charity fund."
+      ],
+      "discriminator": [
+        45,
+        198,
+        185,
+        110,
+        138,
+        35,
+        93,
+        111
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "staking_pool",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  116,
+                  97,
+                  107,
+                  105,
+                  110,
+                  103,
+                  95,
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "staking_pool.token_mint",
+                "account": "StakingPool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "treasury_ata",
+          "writable": true
+        },
+        {
+          "name": "staking_reward_ata",
+          "writable": true
+        },
+        {
+          "name": "monthly_reward_ata",
+          "writable": true
+        },
+        {
+          "name": "annual_reward_ata",
+          "writable": true
+        },
+        {
+          "name": "monthly_donation_ata",
+          "writable": true
+        },
+        {
+          "name": "annual_donation_ata",
+          "writable": true
+        },
+        {
+          "name": "chai_funds_ata",
+          "writable": true
+        },
+        {
+          "name": "treasury_authority",
+          "docs": [
+            "Authority for treasury withdrawals."
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "total_amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "request_unstake_handler",
+      "docs": [
+        "request Unstake tokens."
+      ],
+      "discriminator": [
+        247,
+        45,
+        28,
+        39,
+        83,
+        14,
+        199,
+        48
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "staking_pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  116,
+                  97,
+                  107,
+                  105,
+                  110,
+                  103,
+                  95,
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "staking_pool.token_mint",
+                "account": "StakingPool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_stake",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  107,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user_authority"
+              },
+              {
+                "kind": "arg",
+                "path": "index"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user_authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_authority",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "index",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "stake_tokens_handler",
+      "docs": [
+        "Stake tokens with a specified lockup duration."
+      ],
+      "discriminator": [
+        62,
+        239,
+        204,
+        34,
+        34,
+        195,
+        160,
+        24
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "staking_pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  116,
+                  97,
+                  107,
+                  105,
+                  110,
+                  103,
+                  95,
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "staking_pool.token_mint",
+                "account": "StakingPool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user_authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_stake",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  107,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user_authority"
+              },
+              {
+                "kind": "account",
+                "path": "user.stake_count",
+                "account": "UserStakeInfo"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "user_token_account",
+          "writable": true
+        },
+        {
+          "name": "pool_token_account",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "lockup",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "staking_initialize",
+      "discriminator": [
+        9,
+        50,
+        2,
+        174,
+        241,
+        12,
+        58,
+        189
+      ],
+      "accounts": [
+        {
+          "name": "staking_pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  116,
+                  97,
+                  107,
+                  105,
+                  110,
+                  103,
+                  95,
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "token_mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "staking_reward",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  116,
+                  97,
+                  107,
+                  105,
+                  110,
+                  103,
+                  95,
+                  114,
+                  101,
+                  119,
+                  97,
+                  114,
+                  100
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "token_mint"
+        },
+        {
+          "name": "pool_token_account"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "rate_per_second",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "submit_proposal_handler",
+      "discriminator": [
+        81,
+        94,
+        230,
+        186,
+        5,
+        204,
+        185,
+        57
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "proposal",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  112,
+                  111,
+                  115,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "creator"
+              },
+              {
+                "kind": "account",
+                "path": "config_account.config.next_proposal_id",
+                "account": "ConfigAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "duration",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "unstake_tokens_handler",
+      "docs": [
+        "Unstake tokens after 48h delay and lockup period has expired. unstake before lockup period will result in penalty"
+      ],
+      "discriminator": [
+        81,
+        102,
+        250,
+        207,
+        42,
+        121,
+        178,
+        205
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "staking_pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  116,
+                  97,
+                  107,
+                  105,
+                  110,
+                  103,
+                  95,
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "staking_pool.token_mint",
+                "account": "StakingPool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user_authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_stake",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  107,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user_authority"
+              },
+              {
+                "kind": "arg",
+                "path": "index"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "staking_reward_ata",
+          "writable": true
+        },
+        {
+          "name": "user_token_account",
+          "writable": true
+        },
+        {
+          "name": "pool_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "index",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "vote_on_proposal_handler",
+      "discriminator": [
+        109,
+        31,
+        236,
+        180,
+        187,
+        141,
+        135,
+        102
+      ],
+      "accounts": [
+        {
+          "name": "config_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "proposal",
+          "writable": true
+        },
+        {
+          "name": "voter",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "user",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "voter"
+              }
+            ]
+          }
+        },
+        {
+          "name": "staking_pool"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "proposal_id",
+          "type": "u64"
+        },
+        {
+          "name": "vote_choice",
+          "type": "bool"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Charity",
+      "discriminator": [
+        229,
+        164,
+        231,
+        12,
+        25,
+        172,
+        91,
+        111
+      ]
+    },
+    {
+      "name": "ConfigAccount",
+      "discriminator": [
+        189,
+        255,
+        97,
+        70,
+        186,
+        189,
+        24,
+        102
+      ]
+    },
+    {
+      "name": "Proposal",
+      "discriminator": [
+        26,
+        94,
+        189,
+        187,
+        116,
+        136,
+        53,
+        33
+      ]
+    },
+    {
+      "name": "StakingPool",
+      "discriminator": [
+        203,
+        19,
+        214,
+        220,
+        220,
+        154,
+        24,
+        102
+      ]
+    },
+    {
+      "name": "StakingRewards",
+      "discriminator": [
+        119,
+        25,
+        203,
+        244,
+        250,
+        176,
+        10,
+        113
+      ]
+    },
+    {
+      "name": "Treasury",
+      "discriminator": [
+        238,
+        239,
+        123,
+        238,
+        89,
+        1,
+        168,
+        253
+      ]
+    },
+    {
+      "name": "UserStakeInfo",
+      "discriminator": [
+        219,
+        233,
+        236,
+        123,
+        28,
+        113,
+        89,
+        56
+      ]
+    },
+    {
+      "name": "UserStakesEntry",
+      "discriminator": [
+        22,
+        233,
+        10,
+        13,
+        102,
+        241,
+        112,
+        206
+      ]
+    },
+    {
+      "name": "VoteRecord",
+      "discriminator": [
+        112,
+        9,
+        123,
+        165,
+        234,
+        9,
+        157,
+        167
+      ]
+    },
+    {
+      "name": "WithdrawalProposal",
+      "discriminator": [
+        133,
+        217,
+        76,
+        47,
+        128,
+        98,
+        53,
+        3
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "BuybackBurnEvent",
+      "discriminator": [
+        153,
+        49,
+        206,
+        33,
+        130,
+        79,
+        9,
+        245
+      ]
+    },
+    {
+      "name": "MarketingFundDistributionEvent",
+      "discriminator": [
+        160,
+        120,
+        106,
+        129,
+        97,
+        137,
+        108,
+        1
+      ]
+    },
+    {
+      "name": "ProposalFinalizedEvent",
+      "discriminator": [
+        228,
+        151,
+        231,
+        28,
+        58,
+        215,
+        17,
+        130
+      ]
+    },
+    {
+      "name": "ProposalSubmittedEvent",
+      "discriminator": [
+        210,
+        156,
+        179,
+        54,
+        84,
+        52,
+        115,
+        4
+      ]
+    },
+    {
+      "name": "TreasuryInitializedEvent",
+      "discriminator": [
+        90,
+        115,
+        45,
+        229,
+        107,
+        230,
+        156,
+        252
+      ]
+    },
+    {
+      "name": "VoteCastEvent",
+      "discriminator": [
+        241,
+        151,
+        159,
+        134,
+        250,
+        234,
+        71,
+        234
+      ]
+    },
+    {
+      "name": "WithdrawalApprovedEvent",
+      "discriminator": [
+        165,
+        98,
+        127,
+        24,
+        94,
+        95,
+        6,
+        135
+      ]
+    },
+    {
+      "name": "WithdrawalExecutedEvent",
+      "discriminator": [
+        60,
+        185,
+        83,
+        2,
+        206,
+        217,
+        44,
+        53
+      ]
+    },
+    {
+      "name": "WithdrawalProposalCreatedEvent",
+      "discriminator": [
+        39,
+        131,
+        137,
+        115,
+        212,
+        135,
+        34,
+        51
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "NoStakedTokens",
+      "msg": "User has no staked tokens"
+    },
+    {
+      "code": 6001,
+      "name": "StakingPeriodNotMet",
+      "msg": "Staking period has not been met yet"
+    },
+    {
+      "code": 6002,
+      "name": "WrongStakingPackage",
+      "msg": "Wrong Staking Package"
+    },
+    {
+      "code": 6003,
+      "name": "RewardAlreadyClaimed",
+      "msg": "Reward has already been claimed"
+    },
+    {
+      "code": 6004,
+      "name": "AlreadyStaked",
+      "msg": "Already Staked"
+    },
+    {
+      "code": 6005,
+      "name": "AlreadyUnStaked",
+      "msg": "Already un Staked"
+    },
+    {
+      "code": 6006,
+      "name": "WaitFor48Hours",
+      "msg": "Wait For 48 Hours"
+    },
+    {
+      "code": 6007,
+      "name": "RequestUnstakeFirst",
+      "msg": "Request Unstake First"
+    },
+    {
+      "code": 6008,
+      "name": "UnstakeAlreadyRequested",
+      "msg": "Unstake Already Requested"
+    },
+    {
+      "code": 6009,
+      "name": "RewardOverflow",
+      "msg": "Reward Overflow"
+    },
+    {
+      "code": 6010,
+      "name": "InvalidStakeId",
+      "msg": "Invalid Stake Id"
+    }
+  ],
+  "types": [
+    {
+      "name": "BuybackBurnEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "fee_amount",
+            "type": "u64"
+          },
+          {
+            "name": "tokens_bought",
+            "type": "u64"
+          },
+          {
+            "name": "new_total_burned",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Charity",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "u64"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "name": "wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "total_votes",
+            "type": "u64"
+          },
+          {
+            "name": "start_time",
+            "type": "i64"
+          },
+          {
+            "name": "end_time",
+            "type": "i64"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "CharityStatus"
+              }
+            }
+          },
+          {
+            "name": "admin",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CharityStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Active"
+          },
+          {
+            "name": "Finalized"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Config",
+      "docs": [
+        "Stores global configuration for CHAR Coin."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "monthly_reward_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "annual_reward_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "monthly_donation_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "annual_donation_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "chai_funds",
+            "type": "pubkey"
+          },
+          {
+            "name": "marketing_wallet_1",
+            "type": "pubkey"
+          },
+          {
+            "name": "marketing_wallet_2",
+            "type": "pubkey"
+          },
+          {
+            "name": "death_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "treasury_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "halted",
+            "docs": [
+              "emergency state that indicates if the contract is halted."
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "next_proposal_id",
+            "type": "u64"
+          },
+          {
+            "name": "next_charity_id",
+            "type": "u64"
+          },
+          {
+            "name": "total_burned",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ConfigAccount",
+      "docs": [
+        "Account that holds the global configuration."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "config",
+            "type": {
+              "defined": {
+                "name": "Config"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "MarketingFundDistributionEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "marketing_wallet_1_amount",
+            "type": "u64"
+          },
+          {
+            "name": "marketing_wallet_2_amount",
+            "type": "u64"
+          },
+          {
+            "name": "death_wallet_amount",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Proposal",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "u64"
+          },
+          {
+            "name": "creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "name": "yes_votes",
+            "type": "u64"
+          },
+          {
+            "name": "no_votes",
+            "type": "u64"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "ProposalStatus"
+              }
+            }
+          },
+          {
+            "name": "end_time",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProposalFinalizedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "proposal_id",
+            "type": "u64"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "ProposalStatus"
+              }
+            }
+          },
+          {
+            "name": "yes_votes",
+            "type": "u64"
+          },
+          {
+            "name": "no_votes",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProposalStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Active"
+          },
+          {
+            "name": "Approved"
+          },
+          {
+            "name": "Rejected"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProposalSubmittedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "proposal_creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "proposal_title",
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "StakingPool",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "token_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "pool_token_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "staking_reward_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "total_staked",
+            "type": "u64"
+          },
+          {
+            "name": "reward_issued",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "rate_per_second",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "StakingRewards",
+      "type": {
+        "kind": "struct",
+        "fields": []
+      }
+    },
+    {
+      "name": "Treasury",
+      "docs": [
+        "---------------------------------------------------------------------",
+        "DAO Treasury Functionality (Merged into Governance)",
+        "---------------------------------------------------------------------",
+        "Account structure for the DAO Treasury."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owners",
+            "docs": [
+              "List of multisig owner public keys."
+            ],
+            "type": {
+              "vec": "pubkey"
+            }
+          },
+          {
+            "name": "threshold",
+            "docs": [
+              "Approval threshold required for executing a withdrawal."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "withdrawal_count",
+            "docs": [
+              "Counter for executed withdrawals."
+            ],
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TreasuryInitializedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owners_count",
+            "type": "u64"
+          },
+          {
+            "name": "threshold",
+            "type": "u8"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UserStakeInfo",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "staking_pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "first_staked_at",
+            "type": "i64"
+          },
+          {
+            "name": "total_amount",
+            "type": "u64"
+          },
+          {
+            "name": "reward_issued",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "stake_count",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UserStakesEntry",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "stake_id",
+            "type": "u64"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "staked_at",
+            "type": "i64"
+          },
+          {
+            "name": "lockup",
+            "type": "u64"
+          },
+          {
+            "name": "unstake_requested_at",
+            "type": "i64"
+          },
+          {
+            "name": "last_claimed_at",
+            "type": "i64"
+          },
+          {
+            "name": "current_period",
+            "type": "u64"
+          },
+          {
+            "name": "unstaked",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VoteCastEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "proposal_id",
+            "type": "u64"
+          },
+          {
+            "name": "vote_choice",
+            "type": "bool"
+          },
+          {
+            "name": "amount_staked",
+            "type": "u64"
+          },
+          {
+            "name": "yes_votes",
+            "type": "u64"
+          },
+          {
+            "name": "no_votes",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VoteRecord",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "charity",
+            "type": "pubkey"
+          },
+          {
+            "name": "voter",
+            "type": "pubkey"
+          },
+          {
+            "name": "vote_weight",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WithdrawalApprovedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "signer",
+            "type": "pubkey"
+          },
+          {
+            "name": "current_approvals",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WithdrawalExecutedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "recipient",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WithdrawalProposal",
+      "docs": [
+        "Account structure for a withdrawal proposal."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "amount",
+            "docs": [
+              "Amount (in lamports) proposed for withdrawal."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "recipient",
+            "docs": [
+              "Recipient account to which funds will be sent."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "approvals",
+            "docs": [
+              "List of multisig approvals (owner public keys) collected."
+            ],
+            "type": {
+              "vec": "pubkey"
+            }
+          },
+          {
+            "name": "executed",
+            "docs": [
+              "Whether this proposal has been executed."
+            ],
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WithdrawalProposalCreatedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "recipient",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    }
+  ]
+}

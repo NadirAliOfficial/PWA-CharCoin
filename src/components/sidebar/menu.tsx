@@ -1,6 +1,6 @@
 "use client";
 
-import { Car, Ellipsis } from "lucide-react";
+import { Ellipsis } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -15,8 +15,10 @@ import {
 } from "@/components/ui/tooltip";
 import { getMenuList } from "@/lib/menu-list";
 import { cn } from "@/lib/utils";
-import { LazySvg } from "../custom/lazy-svg";
 import { Logout } from "@mynaui/icons-react";
+import { signOut } from "@/components/const";
+
+import { useRouter } from 'next/navigation';
 
 interface MenuProps {
   isOpen: boolean | undefined;
@@ -25,10 +27,11 @@ interface MenuProps {
 export function Menu({ isOpen }: MenuProps) {
   const pathname = usePathname();
   const menuList = getMenuList();
+  const router = useRouter();
 
   return (
-    <ScrollArea className="[&>div>div[style]]:!block ">
-      <nav className="mt-2 px-2  h-full w-full ">
+    <ScrollArea className="[&>div>div[style]]:!block  ">
+      <nav className="mt-2 px-2  h-full w-full">
         <ul className="flex flex-col min-h-[calc(100vh-48px-36px-16px-40px)] lg:min-h-[calc(100vh-32px-40px-60px)] items-start space-y-1 px-2">
           {menuList.map(({ groupLabel, menus }, index) => (
             <li className={cn("w-full", groupLabel ? "pt-5" : "")} key={index}>
@@ -126,6 +129,11 @@ export function Menu({ isOpen }: MenuProps) {
                   className={cn(
                     "w-full  font-normal border-transparent group mb-1  hover:border-primary   hover:bg-slate-500 hover:text-primary    justify-start  "
                   )}
+                  onClick={async () => {
+                    const result = await signOut();
+                    alert(JSON.stringify(result));
+                    router.push('/login')
+                  }}
                 >
                   <span className={cn(isOpen === false ? "" : "mr-4")}>
                     <Logout className="!w-5 !h-5" />

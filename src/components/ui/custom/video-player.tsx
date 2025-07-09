@@ -5,22 +5,26 @@ import {
   FastForward,
   Volume2,
   VolumeX,
-  Volume1, // Import Volume1 icon for medium volume
+  Volume1,
   Maximize,
 } from "lucide-react";
 import { useRef, useState } from "react";
 
-const CustomVideoPlayer = () => {
-  const videoRef = useRef(null);
-  const [progress, setProgress] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(1);
-  const [isMuted, setIsMuted] = useState(false);
-  const [currentTime, setCurrentTime] = useState("0:00");
-  const [duration, setDuration] = useState("0:00");
-  const [isHovering, setIsHovering] = useState(false);
+type CustomVideoPlayerProps = Record<string, never>; // If no props are expected
 
-  const formatTime = (time) => {
+type VideoRefType = HTMLVideoElement | null;
+
+const CustomVideoPlayer: React.FC<CustomVideoPlayerProps> = () => {
+  const videoRef = useRef<VideoRefType>(null);
+  const [progress, setProgress] = useState<number>(0);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [volume, setVolume] = useState<number>(1);
+  const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [currentTime, setCurrentTime] = useState<string>("0:00");
+  const [duration, setDuration] = useState<string>("0:00");
+  const [isHovering, setIsHovering] = useState<boolean>(false);
+
+  const formatTime = (time: number): string => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60)
       .toString()
@@ -28,7 +32,8 @@ const CustomVideoPlayer = () => {
     return `${minutes}:${seconds}`;
   };
 
-  const handlePlayPause = () => {
+  const handlePlayPause = (): void => {
+    if (!videoRef.current) return;
     if (isPlaying) {
       videoRef.current.pause();
     } else {
@@ -37,15 +42,16 @@ const CustomVideoPlayer = () => {
     setIsPlaying(!isPlaying);
   };
 
-  const handleRewind = () => {
-    videoRef.current.currentTime -= 10;
+  const handleRewind = (): void => {
+    if (videoRef.current) videoRef.current.currentTime -= 10;
   };
 
-  const handleForward = () => {
-    videoRef.current.currentTime += 10;
+  const handleForward = (): void => {
+    if (videoRef.current) videoRef.current.currentTime += 10;
   };
 
-  const handleProgress = () => {
+  const handleProgress = (): void => {
+    if (!videoRef.current) return;
     const currentTime = videoRef.current.currentTime;
     const duration = videoRef.current.duration;
 
@@ -58,37 +64,40 @@ const CustomVideoPlayer = () => {
     }
   };
 
-  const handleVolumeChange = (e) => {
-    const newVolume = e.target.value;
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    if (!videoRef.current) return;
+    const newVolume = parseFloat(e.target.value);
     videoRef.current.volume = newVolume;
     setVolume(newVolume);
 
     if (newVolume > 0) {
-      setIsMuted(false); // Automatically unmute when volume is adjusted
+      setIsMuted(false);
     }
   };
 
-  const handleMuteToggle = () => {
+  const handleMuteToggle = (): void => {
+    if (!videoRef.current) return;
     if (isMuted) {
-      videoRef?.current.muted = false;
+      videoRef.current.muted = false;
       setIsMuted(false);
-      setVolume(videoRef.current.volume || 1); // Restore volume if muted
+      setVolume(videoRef.current.volume || 1);
     } else {
       videoRef.current.muted = true;
       setIsMuted(true);
-      setVolume(0); // Set volume to 0 when muted
+      setVolume(0);
     }
   };
 
-  const handleSeek = (e) => {
-    const rect = e.target.getBoundingClientRect();
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement>): void => {
+    if (!videoRef.current) return;
+    const rect = e.currentTarget.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const newTime = (clickX / rect.width) * videoRef.current.duration;
     videoRef.current.currentTime = newTime;
   };
 
-  const handleFullscreen = () => {
-    if (videoRef.current.requestFullscreen) {
+  const handleFullscreen = (): void => {
+    if (videoRef.current?.requestFullscreen) {
       videoRef.current.requestFullscreen();
     }
   };
@@ -99,7 +108,6 @@ const CustomVideoPlayer = () => {
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      {/* Video */}
       <video
         ref={videoRef}
         width="1200"
@@ -116,11 +124,10 @@ const CustomVideoPlayer = () => {
         Your browser does not support the video tag.
       </video>
 
-      {/* Play/Pause Button in the Center */}
       {!isPlaying ? (
         <button
           onClick={handlePlayPause}
-          className="absolute inset-0 mx-auto my-auto flex items-center justify-center bg-[#067a01]/80 backdrop-blur-sm text-white rounded-full w-16 h-16 hover:scale-110 transition-transform"
+          className="absolute inset-0 mx-auto my-auto flex items-center justify-center bg-primary/80 backdrop-blur-sm text-white rounded-full w-16 h-16 hover:scale-110 transition-transform"
         >
           <Play size={32} className="pl-1" />
         </button>
@@ -133,77 +140,64 @@ const CustomVideoPlayer = () => {
         </button>
       ) : null}
 
-      {/* Controls (Bottom Bar) */}
       {isHovering && (
-        <div className="absolute bottom-0 w-full bg-black/70 px-4 py-2 text-white ">
-          {/* {/* Progress Bar2} */}
+        <div className="absolute bottom-0 w-full bg-black/70 px-4 py-2 text-white">
           <div
             className="relative bg-gray-300 h-2 w-full rounded cursor-pointer"
             onClick={handleSeek}
           >
             <div
-              className="absolute bg-[#067a01] h-2 rounded"
+              className="absolute bg-primary h-2 rounded"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
 
-          {/* Control Buttons */}
           {isPlaying && (
-            <div className="flex items-center justify-between mt-2 ">
+            <div className="flex items-center justify-between mt-2">
               <div className="flex items-center space-x-4">
-                <button onClick={handleRewind} className="hover:text-[#067a01]">
+                <button onClick={handleRewind} className="hover:text-primary">
                   <Rewind />
                 </button>
                 <button
                   onClick={handlePlayPause}
-                  className="hover:text-[#067a01]"
+                  className="hover:text-primary"
                 >
                   {isPlaying ? <Pause /> : <Play />}
                 </button>
-                <button
-                  onClick={handleForward}
-                  className="hover:text-[#067a01]"
-                >
+                <button onClick={handleForward} className="hover:text-primary">
                   <FastForward />
                 </button>
 
-                {/* Volume/Mute Control */}
-                <div className="flex items-center  space-x-2 relative">
+                <div className="flex items-center space-x-2 relative">
                   <button
                     onClick={handleMuteToggle}
-                    className="hover:text-[#067a01]"
+                    className="hover:text-primary"
                   >
                     {isMuted || volume === 0 ? (
                       <VolumeX />
                     ) : volume <= 0.5 ? (
-                      <Volume1 /> // Display Volume1 for medium volume
+                      <Volume1 />
                     ) : (
                       <Volume2 />
                     )}
                   </button>
-                  {/* Show the slider when hovering the volume area */}
                   <input
                     type="range"
                     min="0"
                     max="1"
                     step="0.1"
-                    value={isMuted ? 0 : volume} // Bind the slider to volume or mute
+                    value={isMuted ? 0 : volume}
                     onChange={handleVolumeChange}
-                    className="w-24 max-md:hidden absolute left-full top-1" // Make it visible on top of icons
+                    className="w-24 max-md:hidden absolute left-full top-1"
                   />
                 </div>
               </div>
 
-              {/* Time Display */}
               <div>
                 {currentTime} / {duration}
               </div>
 
-              {/* Fullscreen Button */}
-              <button
-                onClick={handleFullscreen}
-                className="hover:text-[#067a01]"
-              >
+              <button onClick={handleFullscreen} className="hover:text-primary">
                 <Maximize />
               </button>
             </div>
