@@ -1,14 +1,24 @@
-# ⚡ CharCoin PWA
+# CharCoin PWA
 
-This is the official Progressive Web App (PWA) for the **CharCoin** ecosystem.
+Progressive Web App frontend for CharCoin — wallet integration, staking interface, and token dashboard.
 
-### 🌐 Features
-- Wallet connection (Phantom, Solflare, etc.)
-- Real-time balance & staking dashboard
-- DAO voting interface
-- Charity cause browsing & voting
-- Transaction history and rewards view
+## Features
+- PWA — installable on mobile and desktop
+- Phantom / MetaMask wallet connection
+- Staking and unstaking interface
+- Real-time token price and stats
 
-Built for speed, mobile-friendliness, and full Web3 integration with the CHAR Coin smart contracts on Solana.
+## Tech Stack
+- React + TypeScript
+- Vite
+- Tailwind CSS
+- Solana Web3.js
 
-🔗 Live Site: [charcoin.org](https://charcoin.org)
+## Setup
+```bash
+npm install
+npm run dev
+```
+
+## License
+MIT
